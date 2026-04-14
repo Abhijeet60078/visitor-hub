@@ -58,7 +58,20 @@ const CheckIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !phone || !purpose || !host) return;
-    navigate("/success", { state: { name, phone, purpose, host } });
+    
+    // Generate unique visitor ID
+    const visitorId = `VIS-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+    
+    navigate("/success", { 
+      state: { 
+        name, 
+        phone, 
+        purpose, 
+        host,
+        visitorId,
+        checkInTime: new Date().toISOString()
+      } 
+    });
   };
 
   return (

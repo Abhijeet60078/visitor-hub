@@ -7,10 +7,14 @@ const Success = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const canvasRef = useRef(null);
-  const { name = "Visitor" } = (location.state) || {};
+  const { 
+    name = "Visitor",
+    visitorId = `VIS-${Date.now()}-DEFAULT`,
+    checkInTime = new Date().toISOString()
+  } = (location.state) || {};
 
   useEffect(() => {
-    // Generate a simple QR-like pattern on canvas
+    // Generate unique QR-like pattern based on visitor ID
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -21,8 +25,8 @@ const Success = () => {
     ctx.fillRect(0, 0, size, size);
     ctx.fillStyle = "#1e293b";
 
-    // Simple deterministic pattern based on name
-    const seed = name.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+    // Generate pattern based on unique visitor ID
+    const seed = visitorId.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
     const cellSize = 8;
     const count = size / cellSize;
 
@@ -37,7 +41,7 @@ const Success = () => {
     drawMarker(size - cellSize * 4, cellSize);
     drawMarker(cellSize, size - cellSize * 4);
 
-    // Data pattern
+    // Data pattern - unique for each visitor
     for (let i = 5; i < count - 5; i++) {
       for (let j = 5; j < count - 5; j++) {
         if ((seed * (i + 1) * (j + 1)) % 3 === 0) {
@@ -45,13 +49,13 @@ const Success = () => {
         }
       }
     }
-  }, [name]);
+  }, [visitorId]);
 
   const downloadQR = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const link = document.createElement("a");
-    link.download = `visitor-qr-${name.toLowerCase().replace(/\s/g, "-")}.png`;
+    link.download = `visitor-qr-${visitorId}.png`;
     link.href = canvas.toDataURL();
     link.click();
   };
@@ -80,6 +84,13 @@ const Success = () => {
               <canvas ref={canvasRef} className="w-[200px] h-[200px]" />
             </div>
           </div>
+          
+          {/* Visitor ID */}
+          <div className="bg-background rounded-lg p-3 mb-4 border border-border">
+            <p className="text-xs text-muted-foreground mb-1">Visitor ID</p>
+            <p className="text-sm font-mono font-semibold text-foreground break-all">{visitorId}</p>
+          </div>
+          
           <p className="text-xs text-muted-foreground mb-5">
             Show this QR code at the security desk for verification
           </p>
