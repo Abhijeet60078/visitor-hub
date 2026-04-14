@@ -100,9 +100,9 @@ const Success = () => {
           </Button>
         </div>
 
-        <Button variant="ghost" onClick={() => navigate("/")} className="text-muted-foreground hover:text-foreground">
+        <Button variant="ghost" onClick={() => navigate("/checkin")} className="text-muted-foreground hover:text-foreground">
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Check-In
+          Check In Another Visitor
         </Button>
       </div>
     </div>

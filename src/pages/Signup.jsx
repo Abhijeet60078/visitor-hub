@@ -58,7 +58,7 @@ const Signup = () => {
     setTimeout(() => {
       setSuccess(true);
       setTimeout(() => {
-        navigate("/");
+        navigate("/checkin");
       }, 2000);
       setLoading(false);
     }, 1000);
