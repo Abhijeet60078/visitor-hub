@@ -1,3 +1,10 @@
-# Welcome to your Lovable project
+# Visitor Management System - Frontend
 
-TODO: Document your project here
+A modern visitor check-in and management system built with React, Vite, and Tailwind CSS.
+
+## Features
+- Visitor check-in with photo capture
+- Aadhaar document upload
+- QR code generation
+- Admin dashboard
+- Real-time visitor tracking
