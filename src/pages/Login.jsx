@@ -53,7 +53,8 @@ const Login = () => {
     setTimeout(() => {
       // Mock authentication
       if (email === "admin@vms.com" && password === "password123") {
-        navigate("/admin");
+        localStorage.setItem("authToken", "mock_token_" + Date.now());
+        navigate("/signup");
       } else {
         setError("Invalid email or password");
       }
@@ -74,9 +75,9 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Store token and redirect
+        // Store token and redirect to signup
         localStorage.setItem("authToken", data.token);
-        navigate("/admin");
+        navigate("/signup");
       } else {
         setError("Google login failed. Please try again.");
       }
@@ -120,9 +121,9 @@ const Login = () => {
 
               if (res.ok) {
                 const data = await res.json();
-                // Store token and redirect
+                // Store token and redirect to signup
                 localStorage.setItem("authToken", data.token);
-                navigate("/admin");
+                navigate("/signup");
               } else {
                 setError("Facebook login failed. Please try again.");
               }

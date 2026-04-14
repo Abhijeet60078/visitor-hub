@@ -58,7 +58,7 @@ const Signup = () => {
     setTimeout(() => {
       setSuccess(true);
       setTimeout(() => {
-        navigate("/login");
+        navigate("/");
       }, 2000);
       setLoading(false);
     }, 1000);
@@ -72,7 +72,7 @@ const Signup = () => {
             <UserPlus className="w-10 h-10 text-success" />
           </div>
           <h1 className="text-2xl font-bold text-foreground mb-2">Account Created!</h1>
-          <p className="text-muted-foreground mb-6">Your account has been successfully created. Redirecting to login...</p>
+          <p className="text-muted-foreground mb-6">Your account has been successfully created. Redirecting...</p>
         </div>
       </div>
     );
